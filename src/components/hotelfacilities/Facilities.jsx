@@ -1,7 +1,6 @@
 import { Group, Text, Box, Image, Flex, Input, Center } from "@mantine/core";
-import { IconPlayerPlay } from "@tabler/icons-react";
 
-const Hero = () => {
+const Facilities = () => {
   return (
     <Box pb={"2rem"}>
       <Flex
@@ -9,6 +8,7 @@ const Hero = () => {
         bg={" #ebfcfc"}
         // bg={"#f5f5f5"}
         border={"1px solid #dedede"}
+        justify={"center"}
         align={"center"}
         w={"70rem"}
         style={{
@@ -22,7 +22,7 @@ const Hero = () => {
           <Text size="2.9rem" weight={900} mb={10}>
             Find Your Perfect Room, Anytime, Anywhere
           </Text>
-          <Text c="dimmed" mb={20} size="0.9rem">
+          <Text c="dimmed" mb={20}>
             Discover verified listings, flexible leases, and secure payments.
             Renting made easy for everyone!
           </Text>
@@ -31,22 +31,6 @@ const Hero = () => {
               cursor: "pointer",
             }}
           >
-            <Box
-              p={`0.6rem 0.7rem 0.4rem`}
-              bg={"#ffffff"}
-              style={{
-                borderRadius: "15rem",
-                border: "1px solid #dedede",
-                boxShadow: "0px 0px 3px #aaaaaa",
-              }}
-            >
-              <IconPlayerPlay
-                size={20}
-                color="#008080"
-                fill="#008080"
-                radius={"20px"}
-              />
-            </Box>
             <Text weight={600}>Watch video</Text>
           </Group>
         </Box>
@@ -72,4 +56,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Facilities;

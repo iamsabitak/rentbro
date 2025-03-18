@@ -3,7 +3,7 @@ import { Group, Button, Text, Flex } from "@mantine/core";
 const Navigation = () => {
   return (
     <Flex
-      p={28}
+      p={24}
       justify={"right"}
       // align={"center"}
       gap={"18rem"}
