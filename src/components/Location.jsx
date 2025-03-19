@@ -83,7 +83,7 @@ const Location = () => {
           </Button>
         </Box>
       </Flex>
-{/* Pricing component */}
+      {/* Pricing component */}
       <Box
         m={"5rem 2.5rem 0rem 2.9rem"}
         style={{ textAlign: "center", padding: "2rem" }}
@@ -95,32 +95,38 @@ const Location = () => {
           mb={30}
         />
         <Flex justify="center" gap={"2rem"} wrap="wrap">
-          {pricingData.map(({ plan, monthly, yearly }) => (
-            <Card
-              withBorder
-              key={plan}
-              shadow="sm"
-              padding="lg"
-              component="a"
-              target="_blank"
-              mb={"1rem"}
-              w={240}
-              h={110}
-            >
-              <Text weight={500} fw={600}>
-                {plan}
-              </Text>
-              <Flex justify="center" mt={10} align={"center"} gap={10}>
-                <Text size="xl" fw={700} mt={5}>
-                  ₹{billingCycle === "monthly" ? monthly : yearly}{" "}
+          {pricingData.map(({ plan, monthly, yearly }) => {
+            const price = billingCycle === "monthly" ? monthly : yearly;
+            const dynamicWidth = `${price.toString().length * 20 + 100}px`;
+            return (
+              <Card
+                withBorder
+                key={plan}
+                shadow="sm"
+                padding="lg"
+                component="a"
+                target="_blank"
+                m={"1rem 0rem 2rem 0rem"}
+                w={dynamicWidth}
+                h={117}
+              >
+                <Text weight={500} fw={600} align="Left">
+                  {plan}
                 </Text>
-                <Text style={{ fontWeight: "100px" }}>/ month</Text>
-              </Flex>
-            </Card>
-          ))}
+                <Flex justify="center" mt={10} align={"center"} gap={10}>
+                  <Text size="1.7rem" fw={700} mt={5}>
+                    ₹{billingCycle === "monthly" ? monthly : yearly}{" "}
+                  </Text>
+                  <Text fw={200} size="0.9rem">
+                    /month
+                  </Text>
+                </Flex>
+              </Card>
+            );
+          })}
         </Flex>
 
-        <Button color="teal" radius="xl" mt={20} size="md">
+        <Button color="#008080" radius="xl" mt={20} size="md">
           Choose Your Plan
         </Button>
       </Box>
