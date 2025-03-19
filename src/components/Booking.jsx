@@ -4,7 +4,9 @@ import { IconPlayerPlay } from "@tabler/icons-react";
 const Bookings = () => {
   return (
     <Box pb={"2rem"}>
-     <Flex m={"0.5rem 2rem 0rem 5rem"}  mt={"2rem"}
+      <Flex
+        m={"0.5rem 2rem 0rem 5rem"}
+        mt={"1rem"}
         bg={" #ebfcfc"}
         // bg={"#f5f5f5"}
         border={"1px solid #dedede"}
