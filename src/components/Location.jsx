@@ -1,4 +1,13 @@
-import { Text, Box, Image, Flex, Button } from "@mantine/core";
+import {
+  Text,
+  Box,
+  Image,
+  Flex,
+  Button,
+  Card,
+  SegmentedControl,
+} from "@mantine/core";
+import { useState } from "react";
 
 const Location = () => {
   const discoveryTextArray = [
@@ -20,11 +29,18 @@ const Location = () => {
     </Text>,
   ];
 
+  const [billingCycle, setBillingCycle] = useState("monthly");
+
+  const pricingData = [
+    { plan: "Basic", monthly: 399, yearly: 399 * 12 - 399 },
+    { plan: "Premium", monthly: 799, yearly: 799 * 12 - 799 },
+    { plan: "Enterprise", monthly: 1299, yearly: 1299 * 12 - 1299 },
+  ];
+
   return (
     <Box pb={"2rem"}>
       <Flex
-        m={"0.5rem 2rem 0rem 5rem"}
-        mt={"5rem"}
+        m={"5rem 2rem 0rem 5rem"}
         bg={" #ebfcfc"}
         // bg={"#f5f5f5"}
         border={"1px solid #dedede"}
@@ -67,6 +83,47 @@ const Location = () => {
           </Button>
         </Box>
       </Flex>
+{/* Pricing component */}
+      <Box
+        m={"5rem 2.5rem 0rem 2.9rem"}
+        style={{ textAlign: "center", padding: "2rem" }}
+      >
+        <SegmentedControl
+          data={["Monthly", "Yearly"]}
+          value={billingCycle}
+          onChange={(value) => setBillingCycle(value.toLowerCase())}
+          mb={30}
+        />
+        <Flex justify="center" gap={"2rem"} wrap="wrap">
+          {pricingData.map(({ plan, monthly, yearly }) => (
+            <Card
+              withBorder
+              key={plan}
+              shadow="sm"
+              padding="lg"
+              component="a"
+              target="_blank"
+              mb={"1rem"}
+              w={240}
+              h={110}
+            >
+              <Text weight={500} fw={600}>
+                {plan}
+              </Text>
+              <Flex justify="center" mt={10} align={"center"} gap={10}>
+                <Text size="xl" fw={700} mt={5}>
+                  ₹{billingCycle === "monthly" ? monthly : yearly}{" "}
+                </Text>
+                <Text style={{ fontWeight: "100px" }}>/ month</Text>
+              </Flex>
+            </Card>
+          ))}
+        </Flex>
+
+        <Button color="teal" radius="xl" mt={20} size="md">
+          Choose Your Plan
+        </Button>
+      </Box>
     </Box>
   );
 };
