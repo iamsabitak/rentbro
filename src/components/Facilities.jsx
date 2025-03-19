@@ -71,7 +71,7 @@ const Facilitites = () => {
   ];
 
   return (
-    <Box m={"0.5rem 0rem 0rem 2.6rem"} p={"2rem"}>
+    <Box m={"2.9rem 2rem 0rem 5rem"}>
       <Box>
         <Text size="1.9rem" weight={900} mb={10}>
           Our Most Popular Rooms
@@ -97,10 +97,10 @@ const Facilitites = () => {
       <Flex
         justify={"space-evenly"}
         align={"center"}
-        // gap={"0.3rem"}
+        gap={"0.7rem"}
         wrap="wrap" // Allows wrapping of cards into multiple rows
         pt={"2rem"}
-        ml={"-5rem"}
+        ml={"-3rem"}
       >
         {roomData.slice(0, showAll ? roomData.length : 3).map((room, index) => (
           <Card

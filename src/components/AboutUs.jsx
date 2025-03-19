@@ -37,16 +37,22 @@ const AboutUs = () => {
   ];
 
   return (
-    <Flex m={"0.5rem 0rem 0rem 2.6rem"} p={"2.2rem"} gap={"6rem"}>
-      <Box size="1.9rem" mb={10} w={"43rem"} p={"0.1rem"}>
+    <Flex m={"4rem 2rem 0rem 5rem"} gap={"10rem"}>
+      <Box size="1.9rem" mb={10} w={"43rem"}>
         <Text size="2.9rem" weight={900} mb={10}>
           We do our Best facilities provide you
         </Text>
-        <Text c="dimmed" mt={20} >
+        <Text c="dimmed" mt={20}>
           Enjoy top-notch amenities that make your stay comfortable and
           convenient.
         </Text>
-        <Button variant="filled" radius="xl" color="#008080" mr={"4rem"} mt={"3rem"}>
+        <Button
+          variant="filled"
+          radius="xl"
+          color="#008080"
+          mr={"4rem"}
+          mt={"3rem"}
+        >
           Contact Now
         </Button>
       </Box>
@@ -55,7 +61,7 @@ const AboutUs = () => {
         justify={"center"}
         align={"center"}
         wrap="wrap"
-        mr={"2.9rem"}
+        mr={"3rem"}
         gap={"2rem"}
       >
         {cardData.map((card, index) => (
@@ -81,4 +87,4 @@ const AboutUs = () => {
   );
 };
 
-export default  AboutUs ;
+export default AboutUs;

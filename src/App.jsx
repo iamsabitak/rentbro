@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import Facilitites from "./components/Facilities";
 import Bookings from "./components/Booking";
 import AboutUs from "./components/AboutUs";
+import Location from "./components/Location";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Bookings />
       <Facilitites />
       <AboutUs />
+      <Location />
     </MantineProvider>
   );
 };
