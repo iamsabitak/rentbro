@@ -1,7 +1,7 @@
 import { Group, Text, Box, Image, Flex, Input, Center } from "@mantine/core";
 import { IconPlayerPlay } from "@tabler/icons-react";
 
-const Hero = () => {
+const Bookings = () => {
   return (
     <Box pb={"2rem"}>
       <Flex
@@ -72,4 +72,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Bookings;

@@ -1,18 +1,18 @@
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 
-import Hero from "./components/Hero";
 import Navigation from "./components/Navigation";
-import Facilities from "./components/hotelfacilities/facilities";
-import PopularRoom from "./components/hotelfacilities/PopularRoom";
+import Facilitites from "./components/Facilities";
+import Bookings from "./components/Booking";
+import AboutUs from "./components/AboutUs";
 
 const App = () => {
   return (
     <MantineProvider>
       <Navigation />
-      <Hero />
-      <PopularRoom />
-      <Facilities />
+      <Bookings />
+      <Facilitites />
+      <AboutUs />
     </MantineProvider>
   );
 };
