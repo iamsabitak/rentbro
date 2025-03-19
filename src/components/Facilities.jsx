@@ -123,11 +123,11 @@ const Facilitites = () => {
               {room.description}
             </Text>
 
-            <Badge color="teal" mt="md">
+            <Badge color="#008080" mt="md">
               {room.price}
             </Badge>
 
-            <Button variant="filled" color="teal" radius="md" mt="md">
+            <Button variant="filled" color="#008080" radius="md" mt="md">
               View Detail
             </Button>
           </Card>
