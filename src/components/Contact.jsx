@@ -188,7 +188,6 @@ const Contact = () => {
                 size="lg"
                 mb="0.4rem"
                 style={{
-                  textDecoration: "none",
                   cursor: "pointer",
                 }}
               >
@@ -198,7 +197,6 @@ const Contact = () => {
                 size="sm"
                 c="gray.7"
                 style={{
-                  textDecoration: "none",
                   cursor: "pointer",
                 }}
               >
@@ -206,7 +204,6 @@ const Contact = () => {
               </Text>
               <Text
                 style={{
-                  textDecoration: "none",
                   cursor: "pointer",
                 }}
                 size="sm"
@@ -216,7 +213,6 @@ const Contact = () => {
               </Text>
               <Text
                 style={{
-                  textDecoration: "none",
                   cursor: "pointer",
                 }}
                 size="sm"
@@ -228,7 +224,6 @@ const Contact = () => {
                 size="sm"
                 c="gray.7"
                 style={{
-                  textDecoration: "none",
                   cursor: "pointer",
                 }}
               >
@@ -237,12 +232,18 @@ const Contact = () => {
             </Box>
 
             <Box>
-              <Text fw={600} size="lg" mb="0.4rem">
+              <Text
+                fw={600}
+                size="lg"
+                mb="0.4rem"
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 Help
               </Text>
               <Text
                 style={{
-                  textDecoration: "none",
                   cursor: "pointer",
                 }}
                 size="sm"
@@ -250,25 +251,63 @@ const Contact = () => {
               >
                 About Us
               </Text>
-              <Text size="sm" c="gray.7">
+              <Text
+                size="sm"
+                c="gray.7"
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 Help Center
               </Text>
-              <Text size="sm" c="gray.7">
+              <Text
+                size="sm"
+                c="gray.7"
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 Privacy Policy
               </Text>
-              <Text size="sm" c="gray.7">
+              <Text
+                size="sm"
+                c="gray.7"
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 FAQs
               </Text>
             </Box>
 
             <Box>
-              <Text fw={600} size="lg" mb="0.4rem">
+              <Text
+                fw={600}
+                size="lg"
+                mb="0.4rem"
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 Get the app
               </Text>
-              <Text href="#" size="sm" c="gray.7">
+              <Text
+                href="#"
+                size="sm"
+                c="gray.7"
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 iOS App
               </Text>
-              <Text size="sm" c="gray.7">
+              <Text
+                size="sm"
+                c="gray.7"
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 Android App
               </Text>
             </Box>
