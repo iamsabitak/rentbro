@@ -61,7 +61,7 @@ const Navigation = () => {
               cursor: "pointer",
             }}
             size="lg"
-            onClick={() => scrollIntoLocation({ alignment: "center" })}
+            onClick={() => scrollIntoLocation({ alignment: "start" })}
           >
             Location
           </Text>
