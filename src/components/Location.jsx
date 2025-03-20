@@ -86,7 +86,7 @@ const Location = () => {
           }}
         />
         <Box p={`3rem`}>
-          <Text size="2.5rem" weight={900} mb={"1.9rem"}>
+          <Text size="2rem" fw={700} mb={"1.9rem"}>
             Discover our History
           </Text>
 

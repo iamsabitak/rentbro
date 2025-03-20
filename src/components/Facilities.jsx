@@ -73,7 +73,7 @@ const Facilitites = () => {
   return (
     <Box m={"2.9rem 2rem 0rem 5rem"}>
       <Box>
-        <Text size="1.9rem" weight={900} mb={10}>
+        <Text size="2rem" mb={10} fw={700}>
           Our Most Popular Rooms
         </Text>
         <Flex justify={"space-evenly"} align={"center"} gap={"22rem"}>

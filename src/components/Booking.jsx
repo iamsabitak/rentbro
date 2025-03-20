@@ -20,10 +20,10 @@ const Bookings = () => {
         gap={"16rem"}
       >
         <Box pl={`3rem`}>
-          <Text size="2.9rem" weight={900} mb={10}>
+          <Text size="2.9rem" fw={700} mb={10}>
             Find Your Perfect Room, Anytime, Anywhere
           </Text>
-          <Text c="dimmed" mb={20} size="0.9rem">
+          <Text c="dimmed" mb={20} size="0.9rem" mt={16}>
             Discover verified listings, flexible leases, and secure payments.
             Renting made easy for everyone!
           </Text>

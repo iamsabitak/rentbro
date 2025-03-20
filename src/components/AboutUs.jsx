@@ -39,7 +39,7 @@ const AboutUs = () => {
   return (
     <Flex m={"4rem 2rem 0rem 5rem"} gap={"10rem"}>
       <Box size="1.9rem" mb={10} w={"43rem"}>
-        <Text size="2.9rem" weight={900} mb={10}>
+        <Text size="2.9rem" fw={700} mb={10}>
           We do our Best facilities provide you
         </Text>
         <Text c="dimmed" mt={20}>
