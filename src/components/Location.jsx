@@ -1,13 +1,44 @@
-import {
-  Text,
-  Box,
-  Image,
-  Flex,
-  Button,
-  Card,
-  SegmentedControl,
-} from "@mantine/core";
-import { useState } from "react";
+import { Text, Box, Image, Flex, Button, Card, Badge } from "@mantine/core";
+import { IconCircleCheck, IconCircleX } from "@tabler/icons-react";
+
+const pricingData = [
+  {
+    plan: "Basic Plan",
+    price: 1499,
+    features: ["Personalized Recommendations", "Rent Comparison"],
+    missingFeatures: [
+      "Local Insights",
+      "Assisted Negotiations",
+      "Move-In Assistance",
+      "Dedicated Account Manager",
+    ],
+  },
+  {
+    plan: "Premium Plan",
+    price: 3499,
+    features: [
+      "Personalized Recommendations",
+      "Rent Comparison",
+      "Local Insights",
+      "Assisted Negotiations",
+    ],
+    missingFeatures: ["Move-In Assistance", "Dedicated Account Manager"],
+    popular: true,
+  },
+  {
+    plan: "Enterprise Plan",
+    price: 5999,
+    features: [
+      "Personalized Recommendations",
+      "Rent Comparison",
+      "Local Insights",
+      "Assisted Negotiations",
+      "Move-In Assistance",
+      "Dedicated Account Manager",
+    ],
+    missingFeatures: [],
+  },
+];
 
 const Location = () => {
   const discoveryTextArray = [
@@ -27,14 +58,6 @@ const Location = () => {
       solution for thousands of users across the country. At RentBro, we’re
       proud to be making renting easy, transparent, and reliable for everyone.
     </Text>,
-  ];
-
-  const [billingCycle, setBillingCycle] = useState("monthly");
-
-  const pricingData = [
-    { plan: "Basic", monthly: 399, yearly: 399 * 12 - 399 },
-    { plan: "Premium", monthly: 799, yearly: 799 * 12 - 799 },
-    { plan: "Enterprise", monthly: 1299, yearly: 1299 * 12 - 1299 },
   ];
 
   return (
@@ -88,47 +111,52 @@ const Location = () => {
         m={"5rem 2.5rem 0rem 2.9rem"}
         style={{ textAlign: "center", padding: "2rem" }}
       >
-        <SegmentedControl
-          data={["Monthly", "Yearly"]}
-          value={billingCycle}
-          onChange={(value) => setBillingCycle(value.toLowerCase())}
-          mb={30}
-        />
-        <Flex justify="center" gap={"2rem"} wrap="wrap">
-          {pricingData.map(({ plan, monthly, yearly }) => {
-            const price = billingCycle === "monthly" ? monthly : yearly;
-            const dynamicWidth = `${price.toString().length * 20 + 100}px`;
-            return (
-              <Card
-                withBorder
-                key={plan}
-                shadow="sm"
-                padding="lg"
-                component="a"
-                target="_blank"
-                m={"1rem 0rem 2rem 0rem"}
-                w={dynamicWidth}
-                h={117}
-              >
-                <Text weight={500} fw={600} align="Left">
-                  {plan}
-                </Text>
-                <Flex justify="center" mt={10} align={"center"} gap={10}>
-                  <Text size="1.7rem" fw={700} mt={5}>
-                    ₹{billingCycle === "monthly" ? monthly : yearly}{" "}
-                  </Text>
-                  <Text fw={200} size="0.9rem">
-                    /month
-                  </Text>
+        <Text size="2.5rem" weight={900} fw={700}>
+          Affordable Plans for Every Budget
+        </Text>
+        <Flex justify="center" gap="2rem" wrap="wrap" mt={"4rem"}>
+          {pricingData.map(
+            ({ plan, price, features, missingFeatures, popular }) => (
+              <Card key={plan} withBorder shadow="sm" p="2rem" w={349}>
+                <Flex justify="space-between" align={"center"} mb={"0.3rem"}>
+                  <Text fw={600}>{plan}</Text>
+                  {popular && (
+                    <Badge
+                      color="yellow"
+                      // styles={{ label: { color: "black" } }}
+                    >
+                      Most Popular
+                    </Badge>
+                  )}
                 </Flex>
+                <Text fw={700} size="2rem" mt={10} align="left">
+                  ₹{price}
+                </Text>
+                <Box
+                  style={{
+                    padding: 0,
+                    marginTop: 10,
+                    textAlign: "left",
+                  }}
+                >
+                  {features.map((feature) => (
+                    <Text key={feature} style={{ color: "#008080" }}>
+                      <IconCircleCheck /> {feature}
+                    </Text>
+                  ))}
+                  {missingFeatures.map((feature) => (
+                    <Text key={feature} style={{ color: "#888" }}>
+                      <IconCircleX /> {feature}
+                    </Text>
+                  ))}
+                </Box>
+                <Button fullWidth mt={15} color="#008080" textcolor="black">
+                  Select Plan
+                </Button>
               </Card>
-            );
-          })}
+            )
+          )}
         </Flex>
-
-        <Button color="#008080" radius="xl" mt={20} size="md">
-          Choose Your Plan
-        </Button>
       </Box>
     </Box>
   );
