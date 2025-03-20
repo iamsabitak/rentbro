@@ -1,6 +1,21 @@
 import { useState } from "react";
-import { Avatar, Text, Group, Box, Flex, Image } from "@mantine/core";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import {
+  Avatar,
+  Text,
+  Group,
+  Box,
+  Flex,
+  Image,
+  Anchor,
+  Divider,
+} from "@mantine/core";
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandGoogle,
+} from "@tabler/icons-react";
 
 const testimonials = [
   {
@@ -34,102 +49,237 @@ const Contact = () => {
     );
 
   return (
-    <Flex align={"center"} pb={"2rem"}>
-      <Text
-        bg={activeIndex === 0 ? "#e0e0e0" : "#f5f5f5"}
-        ml={"6rem"}
-        mr={"-2rem"}
-        m={"2rem"}
-        w={"3rem"}
-        h={"2.9rem"}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "1px solid #f5f5f5",
-          borderRadius: "50%",
-          padding: "0.56rem",
-          cursor: activeIndex === 0 ? "not-allowed" : "pointer",
-          boxShadow:
-            activeIndex === 0 ? "none" : "4px 4px 10px rgba(0, 0, 0, 0.1)",
-          opacity: activeIndex === 0 ? 0.5 : 1,
-        }}
-        onClick={activeIndex === 0 ? undefined : handlePrev}
-      >
-        <IconChevronLeft size={"1.6rem"} color="#008080" />
-      </Text>
-      <Flex
-        mt={"1rem"}
-        ml={"2rem"}
-        mr={"1rem"}
-        mb={"1rem"}
-        bg={" #ebfcfc"}
-        border={"1px solid #dedede"}
-        align={"center"}
-        w={"70rem"}
-        style={{
-          boxShadow: "5px 5px 5px 4px #f5f5f5",
-          borderStartStartRadius: "1rem",
-          borderStartEndRadius: "1rem",
-        }}
-        gap={"16rem"}
-      >
-        <Group position="apart" pl={`3rem`}>
-          <Box style={{ textAlign: "center" }}>
-            <Text size="lg" fw={500} align="left">
-              {testimonials[activeIndex].text}
-            </Text>
-            <Group mt="md" position="center">
-              <Avatar src={testimonials[activeIndex].image} radius="xl" />
-              <Box>
-                <Text fw={700} align="left">
-                  {testimonials[activeIndex].name}
-                </Text>
-                <Text size="sm" c="dimmed" align="left">
-                  {testimonials[activeIndex].role}
-                </Text>
-              </Box>
-            </Group>
-          </Box>
-        </Group>
-
-        <Image
-          src={testimonials[activeIndex].image}
-          h={300}
-          alt="House"
+    <Box>
+      <Flex align={"center"} pb={"2rem"}>
+        <Text
+          bg={activeIndex === 0 ? "#e0e0e0" : "#f5f5f5"}
+          ml={"6rem"}
+          mr={"-2rem"}
+          m={"2rem"}
+          w={"3rem"}
+          h={"2.9rem"}
           style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: "1px solid #f5f5f5",
+            borderRadius: "50%",
+            padding: "0.56rem",
+            cursor: activeIndex === 0 ? "not-allowed" : "pointer",
+            boxShadow:
+              activeIndex === 0 ? "none" : "4px 4px 10px rgba(0, 0, 0, 0.1)",
+            opacity: activeIndex === 0 ? 0.5 : 1,
+          }}
+          onClick={activeIndex === 0 ? undefined : handlePrev}
+        >
+          <IconChevronLeft size={"1.6rem"} color="#008080" />
+        </Text>
+        <Flex
+          mt={"1rem"}
+          ml={"2rem"}
+          mr={"1rem"}
+          mb={"1rem"}
+          bg={" #ebfcfc"}
+          border={"1px solid #dedede"}
+          align={"center"}
+          w={"70rem"}
+          style={{
+            boxShadow: "5px 5px 5px 4px #f5f5f5",
+            borderStartStartRadius: "1rem",
             borderStartEndRadius: "1rem",
           }}
-        />
+          gap={"16rem"}
+        >
+          <Group position="apart" pl={`3rem`}>
+            <Box style={{ textAlign: "center" }}>
+              <Text size="lg" fw={500} align="left">
+                {testimonials[activeIndex].text}
+              </Text>
+              <Group mt="md" position="center">
+                <Avatar src={testimonials[activeIndex].image} radius="xl" />
+                <Box>
+                  <Text fw={700} align="left">
+                    {testimonials[activeIndex].name}
+                  </Text>
+                  <Text size="sm" c="dimmed" align="left">
+                    {testimonials[activeIndex].role}
+                  </Text>
+                </Box>
+              </Group>
+            </Box>
+          </Group>
+
+          <Image
+            src={testimonials[activeIndex].image}
+            h={300}
+            alt="House"
+            style={{
+              borderStartEndRadius: "1rem",
+            }}
+          />
+        </Flex>
+        <Text
+          bg={activeIndex === testimonials.length - 1 ? "#e0e0e0" : "#f5f5f5"}
+          ml="-1rem"
+          mr="6rem"
+          w="3rem"
+          h="2.9rem"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: "1px solid #f5f5f5",
+            borderRadius: "50%",
+            padding: "0.56rem",
+            cursor:
+              activeIndex === testimonials.length - 1
+                ? "not-allowed"
+                : "pointer",
+            boxShadow:
+              activeIndex === testimonials.length - 1
+                ? "none"
+                : "4px 4px 10px rgba(0, 0, 0, 0.1)",
+            opacity: activeIndex === testimonials.length - 1 ? 0.5 : 1,
+          }}
+          onClick={
+            activeIndex === testimonials.length - 1 ? undefined : handleNext
+          }
+        >
+          <IconChevronRight size={"1.7rem"} color="#008080" />
+        </Text>
       </Flex>
-      <Text
-        bg={activeIndex === testimonials.length - 1 ? "#e0e0e0" : "#f5f5f5"}
-        ml="-1rem"
-        mr="6rem"
-        w="3rem"
-        h="2.9rem"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "1px solid #f5f5f5",
-          borderRadius: "50%",
-          padding: "0.56rem",
-          cursor:
-            activeIndex === testimonials.length - 1 ? "not-allowed" : "pointer",
-          boxShadow:
-            activeIndex === testimonials.length - 1
-              ? "none"
-              : "4px 4px 10px rgba(0, 0, 0, 0.1)",
-          opacity: activeIndex === testimonials.length - 1 ? 0.5 : 1,
-        }}
-        onClick={
-          activeIndex === testimonials.length - 1 ? undefined : handleNext
-        }
-      >
-        <IconChevronRight size={"1.7rem"} color="#008080" />
-      </Text>
-    </Flex>
+
+      <Box bg={"gray.1"} pb={"1rem"}>
+        <Flex
+          justify="space-evenly"
+          align="center"
+          wrap="wrap"
+          gap={"2rem"}
+          pt={"2rem"}
+          mt={"1rem"}
+        >
+          <Box style={{ maxWidth: 400 }}>
+            {/* About Section */}
+            <Text size="sm" c="gray.7">
+              RentBro simplifies room rentals with verified listings, secure
+              payments, and flexible lease options. Whether you&apos;re a
+              student, professional, or landlord, we provide a seamless
+              experience from search to move-in. Join our community and discover
+              a better way to rent.
+            </Text>
+            <Group mt="sm">
+              <Anchor href="#">
+                <IconBrandFacebook size={20} />
+              </Anchor>
+              <Anchor href="#">
+                <IconBrandInstagram size={20} />
+              </Anchor>
+              <Anchor href="#">
+                <IconBrandGoogle size={20} />
+              </Anchor>
+            </Group>
+          </Box>
+
+          {/* Navigation Sections */}
+          <Flex gap="9rem">
+            <Box>
+              <Text
+                fw={600}
+                size="lg"
+                mb="0.4rem"
+                style={{
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Home
+              </Text>
+              <Text
+                size="sm"
+                c="gray.7"
+                style={{
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Booking
+              </Text>
+              <Text
+                style={{
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+                size="sm"
+                c="gray.7"
+              >
+                Facilities
+              </Text>
+              <Text
+                style={{
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+                size="sm"
+                c="gray.7"
+              >
+                Location
+              </Text>
+              <Text
+                size="sm"
+                c="gray.7"
+                style={{
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Contact
+              </Text>
+            </Box>
+
+            <Box>
+              <Text fw={600} size="lg" mb="0.4rem">
+                Help
+              </Text>
+              <Text
+                style={{
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+                size="sm"
+                c="gray.7"
+              >
+                About Us
+              </Text>
+              <Text size="sm" c="gray.7">
+                Help Center
+              </Text>
+              <Text size="sm" c="gray.7">
+                Privacy Policy
+              </Text>
+              <Text size="sm" c="gray.7">
+                FAQs
+              </Text>
+            </Box>
+
+            <Box>
+              <Text fw={600} size="lg" mb="0.4rem">
+                Get the app
+              </Text>
+              <Text href="#" size="sm" c="gray.7">
+                iOS App
+              </Text>
+              <Text size="sm" c="gray.7">
+                Android App
+              </Text>
+            </Box>
+          </Flex>
+        </Flex>
+        <Divider my="md" />
+        <Text align="center" size="sm" c="gray.6">
+          &copy; 2024 All rights reserved.
+        </Text>
+      </Box>
+    </Box>
   );
 };
 
