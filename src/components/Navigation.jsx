@@ -5,7 +5,7 @@ import AboutUs from "./AboutUs";
 import Location from "./Location";
 import Contact from "./Contact";
 import Facilities from "./Facilities";
-import SignUp from "../login/Signup";
+import SignIn from "../login/SignIn";
 
 const Navigation = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -84,8 +84,9 @@ const Navigation = () => {
           title="Authentication"
           position="right"
           size="35rem"
+          padding="xl"
         >
-          <SignUp />
+          <SignIn />
         </Drawer>
         <Button
           variant="filled"
@@ -94,7 +95,7 @@ const Navigation = () => {
           mr={"4rem"}
           onClick={open}
         >
-          Sign Up
+          Sign In
         </Button>
       </Flex>
       <Box ref={targetRefBooking}>
