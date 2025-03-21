@@ -1,12 +1,14 @@
-import { Group, Button, Text, Flex, Box } from "@mantine/core";
-import { useScrollIntoView } from "@mantine/hooks";
+import { Group, Button, Text, Flex, Box, Drawer } from "@mantine/core";
+import { useScrollIntoView, useDisclosure } from "@mantine/hooks";
 import Bookings from "./Booking";
 import AboutUs from "./AboutUs";
 import Location from "./Location";
 import Contact from "./Contact";
 import Facilities from "./Facilities";
+import SignUp from "../login/Signup";
 
 const Navigation = () => {
+  const [opened, { open, close }] = useDisclosure(false);
   const { scrollIntoView: scrollIntoAboutUs, targetRef: targetRefAboutUs } =
     useScrollIntoView({ offset: 60 });
   const { scrollIntoView: scrollIntoBooking, targetRef: targetRefBooking } =
@@ -76,8 +78,23 @@ const Navigation = () => {
             Contact
           </Text>
         </Group>
-        <Button variant="filled" radius="xl" color="#008080" mr={"4rem"}>
-          Login
+        <Drawer
+          opened={opened}
+          onClose={close}
+          title="Authentication"
+          position="right"
+          size="35rem"
+        >
+          <SignUp />
+        </Drawer>
+        <Button
+          variant="filled"
+          radius="xl"
+          color="#008080"
+          mr={"4rem"}
+          onClick={open}
+        >
+          Sign Up
         </Button>
       </Flex>
       <Box ref={targetRefBooking}>
