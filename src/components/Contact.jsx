@@ -73,7 +73,7 @@ const Contact = () => {
           onClick={activeIndex === 0 ? undefined : handlePrev}
           component="div"
         >
-          <IconChevronLeft size={1.6} color="#008080" />
+          <IconChevronLeft size={60} color="#008080" />
         </Text>
         <Flex
           mt={"1rem"}
@@ -120,7 +120,7 @@ const Contact = () => {
           />
         </Flex>
         <Text
-        component="div"
+          component="div"
           bg={activeIndex === testimonials.length - 1 ? "#e0e0e0" : "#f5f5f5"}
           ml="-1rem"
           mr="6rem"
@@ -147,7 +147,7 @@ const Contact = () => {
             activeIndex === testimonials.length - 1 ? undefined : handleNext
           }
         >
-          <IconChevronRight size={1.7} color="#008080" />
+          <IconChevronRight size={60} color="#008080" />
         </Text>
       </Flex>
 
@@ -162,7 +162,7 @@ const Contact = () => {
         >
           <Box style={{ maxWidth: 400 }}>
             {/* About Section */}
-            <Text size="sm" c="gray.7" >
+            <Text size="sm" c="gray.7">
               RentBro simplifies room rentals with verified listings, secure
               payments, and flexible lease options. Whether you&apos;re a
               student, professional, or landlord, we provide a seamless

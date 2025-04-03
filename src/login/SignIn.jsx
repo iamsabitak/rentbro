@@ -26,7 +26,7 @@ const SignIn = () => {
       <Title order={3} mb="md" align="center">
         Sign In
       </Title>
-      
+
       {/* Sign In Form */}
       <TextInput
         label="Email"
@@ -44,17 +44,28 @@ const SignIn = () => {
         required
         mb="md"
       />
-      
+
       {/* Remember me checkbox and Sign In button */}
       <Group position="apart" mt="md">
         <Checkbox label="Remember me" />
-        <Button onClick={handleSignIn}>Sign In</Button>
+        <Button
+          onClick={handleSignIn}
+          variant="filled"
+          radius="xl"
+          color="#008080"
+          mr={"4rem"}
+        >
+          Sign In
+        </Button>
       </Group>
 
       {/* Sign Up Link */}
       <Group position="center" mt="md">
         <Text size="sm">Don&apos;t have an account?</Text>
-        <Button variant="link" onClick={() => setDrawerOpened(true)} size="sm">
+        <Button variant="filled"
+          radius="xl"
+          color="#008080"
+          mr={"4rem"} onClick={() => setDrawerOpened(true)} size="sm">
           Create one
         </Button>
       </Group>

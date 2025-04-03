@@ -67,14 +67,26 @@ const Signup = () => {
         mt="md"
       />
       <Checkbox label="I agree to the terms and conditions" mt="md" required />
-      <Button onClick={handleSignUp} mt="md" fullWidth>
+      <Button
+        variant="filled"
+        radius="xl"
+        color="#008080"
+        onClick={handleSignUp}
+        mt="md"
+      >
         Register
       </Button>
 
       {/* Already have an account? Section */}
       <Group position="center" mt="md">
         <Text size="sm">Already have an account?</Text>
-        <Button variant="link" size="sm">
+        <Button
+          variant="filled"
+          radius="xl"
+          color="#008080"
+          mr={"4rem"}
+          size="sm"
+        >
           Sign In
         </Button>
       </Group>
