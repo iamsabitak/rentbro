@@ -1,12 +1,33 @@
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import SignIn from "./login/SignIn";
+import Signup from "./login/Signup";
+import { useState } from "react";
 
 const App = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <MantineProvider>
-      <Navigation />
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigation />}
+          />
+          <Route
+            path="/signin"
+            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
+          />
+          <Route
+            path="/signup"
+            element={<Signup setIsAuthenticated={setIsAuthenticated} />}
+          />
+        </Routes>
+      </Router>
     </MantineProvider>
   );
 };

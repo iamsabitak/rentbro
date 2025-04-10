@@ -8,20 +8,26 @@ import {
   Box,
   Title,
   Text,
-  Drawer,
+  Alert, // Import Alert for displaying errors
 } from "@mantine/core";
-import Signup from "./Signup";
+import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+// eslint-disable-next-line react/prop-types
+const SignIn = ({ setIsAuthenticated }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [drawerOpened, setDrawerOpened] = useState(false);
+  const [error, setError] = useState(""); // For error messages
+  const [isLoading, setIsLoading] = useState(false); // For loading state
 
   const handleSignIn = async () => {
     if (!email || !password) {
-      alert("Please enter both email and password.");
-      return;
+      setError("Please enter both email and password.");
+      return; // Early return if validation fails
     }
+
+    setIsLoading(true); // Show loading indicator while requesting
+    setError(""); // Clear any previous errors
 
     try {
       const response = await fetch("http://localhost:5000/signin", {
@@ -35,15 +41,15 @@ const SignIn = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("✅ Sign in successful!");
-        console.log("User:", data.user);
-        // You can store user info in context, localStorage, etc.
+        setIsAuthenticated(true);
+        navigate("/"); // Navigate to the home page or any other page
       } else {
-        alert(`❌ ${data.message || "Sign in failed"}`);
+        setError(data.message || "Sign in failed, please try again.");
       }
     } catch (error) {
-      console.error("❌ Error during sign in:", error);
-      alert("Something went wrong!");
+      setError(error, "An unexpected error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false); // Stop loading indicator
     }
   };
 
@@ -53,7 +59,13 @@ const SignIn = () => {
         Sign In
       </Title>
 
-      {/* Sign In Form */}
+      {/* Show error if any */}
+      {error && (
+        <Alert color="red" mb="md">
+          {error}
+        </Alert>
+      )}
+
       <TextInput
         label="Email"
         placeholder="Your email"
@@ -71,7 +83,6 @@ const SignIn = () => {
         mb="md"
       />
 
-      {/* Remember me checkbox and Sign In button */}
       <Group position="apart" mt="md">
         <Checkbox label="Remember me" />
         <Button
@@ -79,38 +90,24 @@ const SignIn = () => {
           variant="filled"
           radius="xl"
           color="#008080"
-          mr={"4rem"}
+          loading={isLoading} // Show loading spinner when submitting
         >
           Sign In
         </Button>
       </Group>
 
-      {/* Sign Up Link */}
       <Group position="center" mt="md">
         <Text size="sm">Don&apos;t have an account?</Text>
         <Button
           variant="filled"
           radius="xl"
           color="#008080"
-          mr={"4rem"}
-          onClick={() => setDrawerOpened(true)}
           size="sm"
+          onClick={() => navigate("/signup")}
         >
           Create one
         </Button>
       </Group>
-
-      {/* Drawer for Sign Up */}
-      <Drawer
-        opened={drawerOpened}
-        onClose={() => setDrawerOpened(false)}
-        title="Create a New Account"
-        padding="xl"
-        size="35rem"
-        position="right"
-      >
-        <Signup />
-      </Drawer>
     </Box>
   );
 };

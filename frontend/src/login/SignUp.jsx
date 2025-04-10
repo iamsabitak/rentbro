@@ -7,21 +7,40 @@ import {
   TextInput,
   Title,
   Text,
+  Alert,
 } from "@mantine/core";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+// eslint-disable-next-line react/prop-types
+const Signup = ({ setIsAuthenticated }) => {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(""); // To display error messages
+  const [loading, setLoading] = useState(false); // To track form submission
+
   const handleSignUp = async () => {
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
+    // Clear previous errors
+    setErrorMessage("");
+
+    // Check for required fields and password match
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      setErrorMessage("Please fill in all fields.");
       return;
     }
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true); // Set loading state to true
 
     try {
       const response = await fetch("http://localhost:5000/signup", {
@@ -38,17 +57,20 @@ const Signup = () => {
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        alert("✅ Signup successful!");
-        console.log(data);
-        // Optionally redirect to sign-in page
+        setIsAuthenticated(true);
+        navigate("/"); // Navigate to home page after signup
       } else {
-        alert(`❌ ${data.message || "Signup failed"}`);
-        console.log(data);
+        setErrorMessage(data.message || "Signup failed. Please try again.");
       }
     } catch (error) {
-      console.error("Error during signup:", error);
-      alert("❌ Something went wrong!");
+      setErrorMessage(
+        error,
+        "An unexpected error occurred. Please try again later."
+      );
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -57,6 +79,14 @@ const Signup = () => {
       <Title order={3} mb="md" align="center">
         Sign Up
       </Title>
+
+      {/* Error Message Display */}
+      {errorMessage && (
+        <Alert color="red" mb="md">
+          {errorMessage}
+        </Alert>
+      )}
+
       <Group grow>
         <TextInput
           label="First name"
@@ -73,6 +103,7 @@ const Signup = () => {
           required
         />
       </Group>
+
       <TextInput
         label="Email"
         placeholder="Your email"
@@ -81,6 +112,7 @@ const Signup = () => {
         required
         mt="md"
       />
+
       <PasswordInput
         label="Password"
         placeholder="Your password"
@@ -89,6 +121,7 @@ const Signup = () => {
         required
         mt="md"
       />
+
       <PasswordInput
         label="Confirm Password"
         placeholder="Confirm password"
@@ -97,26 +130,28 @@ const Signup = () => {
         required
         mt="md"
       />
+
       <Checkbox label="I agree to the terms and conditions" mt="md" required />
+
       <Button
         variant="filled"
         radius="xl"
         color="#008080"
         onClick={handleSignUp}
         mt="md"
+        loading={loading} // Display loading spinner while submitting
       >
         Register
       </Button>
 
-      {/* Already have an account? Section */}
       <Group position="center" mt="md">
         <Text size="sm">Already have an account?</Text>
         <Button
           variant="filled"
           radius="xl"
           color="#008080"
-          mr={"4rem"}
           size="sm"
+          onClick={() => navigate("/signin")}
         >
           Sign In
         </Button>

@@ -1,14 +1,15 @@
-import { Group, Button, Text, Flex, Box, Drawer } from "@mantine/core";
-import { useScrollIntoView, useDisclosure } from "@mantine/hooks";
+import { Group, Button, Text, Flex, Box } from "@mantine/core";
+import { useScrollIntoView } from "@mantine/hooks";
 import Bookings from "./Booking";
 import AboutUs from "./AboutUs";
 import Location from "./Location";
 import Contact from "./Contact";
 import Facilities from "./Facilities";
-import SignIn from "../login/SignIn";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+  // Inside Navigation component
+  const navigate = useNavigate();
   const { scrollIntoView: scrollIntoAboutUs, targetRef: targetRefAboutUs } =
     useScrollIntoView({ offset: 60 });
   const { scrollIntoView: scrollIntoBooking, targetRef: targetRefBooking } =
@@ -78,22 +79,13 @@ const Navigation = () => {
             Contact
           </Text>
         </Group>
-        <Drawer
-          opened={opened}
-          onClose={close}
-          title="Authentication"
-          position="right"
-          size="35rem"
-          padding="xl"
-        >
-          <SignIn />
-        </Drawer>
+
         <Button
           variant="filled"
           radius="xl"
           color="#008080"
           mr={"4rem"}
-          onClick={open}
+          onClick={() => navigate("/signin")}
         >
           Sign In
         </Button>
