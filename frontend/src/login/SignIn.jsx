@@ -17,8 +17,34 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [drawerOpened, setDrawerOpened] = useState(false);
 
-  const handleSignIn = () => {
-    console.log({ email, password });
+  const handleSignIn = async () => {
+    if (!email || !password) {
+      alert("Please enter both email and password.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("✅ Sign in successful!");
+        console.log("User:", data.user);
+        // You can store user info in context, localStorage, etc.
+      } else {
+        alert(`❌ ${data.message || "Sign in failed"}`);
+      }
+    } catch (error) {
+      console.error("❌ Error during sign in:", error);
+      alert("Something went wrong!");
+    }
   };
 
   return (
@@ -62,10 +88,14 @@ const SignIn = () => {
       {/* Sign Up Link */}
       <Group position="center" mt="md">
         <Text size="sm">Don&apos;t have an account?</Text>
-        <Button variant="filled"
+        <Button
+          variant="filled"
           radius="xl"
           color="#008080"
-          mr={"4rem"} onClick={() => setDrawerOpened(true)} size="sm">
+          mr={"4rem"}
+          onClick={() => setDrawerOpened(true)}
+          size="sm"
+        >
           Create one
         </Button>
       </Group>

@@ -17,8 +17,39 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSignUp = () => {
-    console.log({ firstName, lastName, email, password, confirmPassword });
+  const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          first_Name: firstName,
+          last_Name: lastName,
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("✅ Signup successful!");
+        console.log(data);
+        // Optionally redirect to sign-in page
+      } else {
+        alert(`❌ ${data.message || "Signup failed"}`);
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+      alert("❌ Something went wrong!");
+    }
   };
 
   return (
