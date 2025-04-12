@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const Signup = ({ setIsAuthenticated }) => {
+const SignUp = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
@@ -160,4 +160,4 @@ const Signup = ({ setIsAuthenticated }) => {
   );
 };
 
-export default Signup;
+export default SignUp;

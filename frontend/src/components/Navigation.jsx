@@ -1,4 +1,4 @@
-import { Group, Button, Text, Flex, Box } from "@mantine/core";
+import { Group, Button, Text, Flex, Box, Avatar } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
 import Bookings from "./Booking";
 import AboutUs from "./AboutUs";
@@ -6,10 +6,21 @@ import Location from "./Location";
 import Contact from "./Contact";
 import Facilities from "./Facilities";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const Navigation = () => {
-  // Inside Navigation component
+// eslint-disable-next-line react/prop-types
+const Navigation = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null); // Store user information
+
+  useEffect(() => {
+    // Simulate checking if user is authenticated (this can be replaced with actual logic)
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUser(storedUser); // Set user if available in localStorage (or from API)
+    }
+  }, []);
+
   const { scrollIntoView: scrollIntoAboutUs, targetRef: targetRefAboutUs } =
     useScrollIntoView({ offset: 60 });
   const { scrollIntoView: scrollIntoBooking, targetRef: targetRefBooking } =
@@ -22,9 +33,16 @@ const Navigation = () => {
     useScrollIntoView({ offset: 60 });
   const { scrollIntoView: scrollIntoContact, targetRef: targetRefContact } =
     useScrollIntoView({ offset: 60 });
+
+  const handleSignOut = () => {
+    localStorage.removeItem("user"); // Remove user from localStorage
+    setUser(null); // Clear user state
+    setIsAuthenticated(false); // Update authentication state
+    navigate("/signin"); // Navigate to sign-in page
+  };
+
   return (
     <>
-      {" "}
       <Flex p={24} justify={"right"} gap={"18rem"}>
         <Group gap={40}>
           <Text
@@ -80,15 +98,39 @@ const Navigation = () => {
           </Text>
         </Group>
 
-        <Button
-          variant="filled"
-          radius="xl"
-          color="#008080"
-          mr={"4rem"}
-          onClick={() => navigate("/signin")}
-        >
-          Sign In
-        </Button>
+        {/* Conditional rendering based on user authentication */}
+        {user ? (
+          <Flex align="center">
+            <Avatar
+              src={user?.avatar || "path_to_default_avatar"}
+              alt={user?.name || "No Name"}
+              radius="xl"
+            />
+            <Text ml={8} mr={30}>
+              {user?.name || "Guest"}
+            </Text>
+            <Button
+              onClick={handleSignOut}
+              variant="filled"
+              radius="xl"
+              color="#008080"
+              mr={"4rem"}
+            >
+              Sign Out
+            </Button>{" "}
+            {/* Add Sign Out button */}
+          </Flex>
+        ) : (
+          <Button
+            variant="filled"
+            radius="xl"
+            color="#008080"
+            mr={"4rem"}
+            onClick={() => navigate("/signin")}
+          >
+            Sign In
+          </Button>
+        )}
       </Flex>
       <Box ref={targetRefBooking}>
         <Bookings />

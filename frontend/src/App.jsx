@@ -3,7 +3,7 @@ import "@mantine/core/styles.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import SignIn from "./login/SignIn";
-import Signup from "./login/Signup";
+import Signup from "./login/SignUp";
 import { useState } from "react";
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<Navigation />}
+            element={<Navigation setIsAuthenticated={setIsAuthenticated} />}
           />
           <Route
             path="/signin"

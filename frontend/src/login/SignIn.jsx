@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextInput,
   PasswordInput,
@@ -20,13 +20,22 @@ const SignIn = ({ setIsAuthenticated }) => {
   const [error, setError] = useState(""); // For error messages
   const [isLoading, setIsLoading] = useState(false); // For loading state
 
+  // Check if user is already authenticated on component mount
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setIsAuthenticated(true); // Set the authenticated state to true
+      navigate("/"); // Redirect to home or dashboard
+    }
+  }, [navigate, setIsAuthenticated]); // Run this effect only once, when the component mounts
+
   const handleSignIn = async () => {
     if (!email || !password) {
       setError("Please enter both email and password.");
-      return; // Early return if validation fails
+      return;
     }
 
-    setIsLoading(true); // Show loading indicator while requesting
+    setIsLoading(true);
     setError(""); // Clear any previous errors
 
     try {
@@ -41,8 +50,15 @@ const SignIn = ({ setIsAuthenticated }) => {
       const data = await response.json();
 
       if (response.ok) {
+        const userData = {
+          name: `${data?.first_Name || "No"} ${data?.last_Name || "Name"}`,
+          avatar: data?.avatar || "",
+        };
+
+        console.log(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
         setIsAuthenticated(true);
-        navigate("/"); // Navigate to the home page or any other page
+        navigate("/"); // Redirect to home or dashboard
       } else {
         setError(data.message || "Sign in failed, please try again.");
       }
