@@ -106,7 +106,7 @@ const SignIn = ({ setIsAuthenticated }) => {
           variant="filled"
           radius="xl"
           color="#008080"
-          loading={isLoading} // Show loading spinner when submitting
+          loading={isLoading} 
         >
           Sign In
         </Button>
