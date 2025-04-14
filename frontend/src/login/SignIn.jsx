@@ -34,7 +34,7 @@ const SignIn = ({ setIsAuthenticated }) => {
       setError("Please enter both email and password.");
       return;
     }
-
+    console.log("Sending", { email, password });
     setIsLoading(true);
     setError(""); // Clear any previous errors
 
@@ -48,14 +48,13 @@ const SignIn = ({ setIsAuthenticated }) => {
       });
 
       const data = await response.json();
-
+      console.log("data", data);
       if (response.ok) {
         const userData = {
           name: `${data?.first_Name || "No"} ${data?.last_Name || "Name"}`,
           avatar: data?.avatar || "",
         };
 
-        console.log(userData);
         localStorage.setItem("user", JSON.stringify(userData));
         setIsAuthenticated(true);
         navigate("/"); // Redirect to home or dashboard
@@ -63,7 +62,8 @@ const SignIn = ({ setIsAuthenticated }) => {
         setError(data.message || "Sign in failed, please try again.");
       }
     } catch (error) {
-      setError(error, "An unexpected error occurred. Please try again later.");
+      console.error("Fetch error:", error);
+      setError("An unexpected error occurred. Please try again later.");
     } finally {
       setIsLoading(false); // Stop loading indicator
     }
@@ -106,7 +106,7 @@ const SignIn = ({ setIsAuthenticated }) => {
           variant="filled"
           radius="xl"
           color="#008080"
-          loading={isLoading} 
+          loading={isLoading}
         >
           Sign In
         </Button>
