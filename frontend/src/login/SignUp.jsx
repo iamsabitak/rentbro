@@ -13,8 +13,14 @@ import {
   Stack,
   Divider,
 } from "@mantine/core";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import useValidation from "../utils/useValidation";
 
 // eslint-disable-next-line react/prop-types
 const SignUp = ({ setIsAuthenticated }) => {
@@ -29,13 +35,10 @@ const SignUp = ({ setIsAuthenticated }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSignUp = async () => {
+  const onSubmit = async (data) => {
     setErrorMessage("");
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      setErrorMessage("Please fill in all fields.");
-      return;
-    }
+    const { firstName, lastName, email, password, confirmPassword } = data;
 
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
@@ -58,14 +61,14 @@ const SignUp = ({ setIsAuthenticated }) => {
         }),
       });
 
-      const data = await response.json();
+      const resData = await response.json();
 
       if (response.ok) {
         setIsAuthenticated(true);
         alert("Signup successful!");
         navigate("/signin");
       } else {
-        setErrorMessage(data.message || "Signup failed. Please try again.");
+        setErrorMessage(resData.message || "Signup failed. Please try again.");
       }
     } catch (error) {
       setErrorMessage("An unexpected error occurred. Please try again later.");
@@ -73,6 +76,16 @@ const SignUp = ({ setIsAuthenticated }) => {
       setLoading(false);
     }
   };
+
+  const schema = useValidation();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   return (
     <Box
@@ -108,63 +121,63 @@ const SignUp = ({ setIsAuthenticated }) => {
         )}
 
         <Stack spacing="sm">
-          <Group grow>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {" "}
+            <Group grow>
+              <TextInput
+                label="First Name"
+                placeholder="Sabita"
+                required
+                {...register("firstName")}
+                error={errors.firstName?.message}
+              />
+              <TextInput
+                label="Last Name"
+                placeholder="Khadka"
+                required
+                {...register("lastName")}
+                error={errors.lastName?.message}
+              />
+            </Group>
             <TextInput
-              label="First Name"
-              placeholder="Sabita"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              label="Email"
+              placeholder="you@example.com"
               required
+              {...register("email")}
+              error={errors.email?.message}
             />
-            <TextInput
-              label="Last Name"
-              placeholder="Khadka"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+            <PasswordInput
+              label="Password"
+              placeholder="Your password"
               required
+              {...register("password")}
+              error={errors.password?.message}
             />
-          </Group>
-
-          <TextInput
-            label="Email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          <PasswordInput
-            label="Password"
-            placeholder="Your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-          <PasswordInput
-            label="Confirm Password"
-            placeholder="Re-enter password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-
-          <Checkbox
-            label="I agree to the terms and conditions"
-            mt="xs"
-            required
-          />
-
-          <Button
-            fullWidth
-            radius="xl"
-            color="#008080"
-            onClick={handleSignUp}
-            loading={loading}
-            mt="sm"
-          >
-            Register
-          </Button>
+            <PasswordInput
+              label="Confirm Password"
+              placeholder="Re-enter password"
+              required
+              {...register("confirmPassword")}
+              error={errors.confirmPassword?.message}
+            />
+            <Checkbox
+              label="I agree to the terms and conditions"
+              mt="xs"
+              required
+              {...register("terms")}
+              error={errors.terms?.message}
+            />
+            <Button
+              fullWidth
+              radius="xl"
+              color="#008080"
+              loading={loading}
+              mt="sm"
+              type="submit"
+            >
+              Register
+            </Button>
+          </form>
         </Stack>
 
         <Divider my="lg" label="or" labelPosition="center" />
