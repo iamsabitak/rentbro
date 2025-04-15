@@ -5,10 +5,13 @@ import {
   Checkbox,
   Button,
   Group,
-  Box,
   Title,
   Text,
-  Alert, // Import Alert for displaying errors
+  Alert,
+  Paper,
+  Stack,
+  Box,
+  Divider,
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
@@ -17,26 +20,27 @@ const SignIn = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // For error messages
-  const [isLoading, setIsLoading] = useState(false); // For loading state
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Check if user is already authenticated on component mount
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      setIsAuthenticated(true); // Set the authenticated state to true
-      navigate("/"); // Redirect to home or dashboard
+      setIsAuthenticated(true);
+      navigate("/");
     }
-  }, [navigate, setIsAuthenticated]); // Run this effect only once, when the component mounts
+  }, [navigate, setIsAuthenticated]);
 
   const handleSignIn = async () => {
     if (!email || !password) {
       setError("Please enter both email and password.");
       return;
     }
+
     console.log("Sending", { email, password });
+
     setIsLoading(true);
-    setError(""); // Clear any previous errors
+    setError("");
 
     try {
       const response = await fetch("http://localhost:5000/signin", {
@@ -49,6 +53,7 @@ const SignIn = ({ setIsAuthenticated }) => {
 
       const data = await response.json();
       console.log("data", data);
+
       if (response.ok) {
         const userData = {
           name: `${data?.first_Name || "No"} ${data?.last_Name || "Name"}`,
@@ -57,7 +62,7 @@ const SignIn = ({ setIsAuthenticated }) => {
 
         localStorage.setItem("user", JSON.stringify(userData));
         setIsAuthenticated(true);
-        navigate("/"); // Redirect to home or dashboard
+        navigate("/");
       } else {
         setError(data.message || "Sign in failed, please try again.");
       }
@@ -65,65 +70,89 @@ const SignIn = ({ setIsAuthenticated }) => {
       console.error("Fetch error:", error);
       setError("An unexpected error occurred. Please try again later.");
     } finally {
-      setIsLoading(false); // Stop loading indicator
+      setIsLoading(false);
     }
   };
 
   return (
-    <Box mx="auto" maxWidth={400} padding="xl">
-      <Title order={3} mb="md" align="center">
-        Sign In
-      </Title>
+    <Box
+      mih="100vh"
+      bg="#f9f9f9"
+      px="md"
+      py="xl"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Paper shadow="md" radius="lg" p="xl" withBorder w={500}>
+        <Title align="center" order={2} mb="md" c="#008080">
+          Welcome Back 👋
+        </Title>
 
-      {/* Show error if any */}
-      {error && (
-        <Alert color="red" mb="md">
-          {error}
-        </Alert>
-      )}
+        <Text c="dimmed" size="sm" align="center" mb="lg">
+          Please sign in to your account
+        </Text>
 
-      <TextInput
-        label="Email"
-        placeholder="Your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        mb="md"
-      />
-      <PasswordInput
-        label="Password"
-        placeholder="Your password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        mb="md"
-      />
+        {error && (
+          <Alert
+            color="red"
+            mb="md"
+            withCloseButton
+            onClose={() => setError("")}
+          >
+            {error}
+          </Alert>
+        )}
 
-      <Group position="apart" mt="md">
-        <Checkbox label="Remember me" />
-        <Button
-          onClick={handleSignIn}
-          variant="filled"
-          radius="xl"
-          color="#008080"
-          loading={isLoading}
-        >
-          Sign In
-        </Button>
-      </Group>
+        <Stack spacing="md">
+          <TextInput
+            label="Email"
+            placeholder="example@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            radius="md"
+            required
+          />
+          <PasswordInput
+            label="Password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            radius="md"
+            required
+          />
+          <Group position="apart" mt="xs">
+            <Checkbox label="Remember me" />
+          </Group>
+          <Button
+            fullWidth
+            radius="xl"
+            mt="md"
+            onClick={handleSignIn}
+            color="#008080"
+            loading={isLoading}
+          >
+            Sign In
+          </Button>
+        </Stack>
 
-      <Group position="center" mt="md">
-        <Text size="sm">Don&apos;t have an account?</Text>
-        <Button
-          variant="filled"
-          radius="xl"
-          color="#008080"
-          size="sm"
-          onClick={() => navigate("/signup")}
-        >
-          Create one
-        </Button>
-      </Group>
+        <Divider my="xl" label="or" labelPosition="center" />
+
+        <Group position="center">
+          <Text size="sm">Don’t have an account?</Text>
+          <Button
+            variant="outline"
+            color="#008080"
+            radius="xl"
+            size="xs"
+            onClick={() => navigate("/signup")}
+          >
+            Sign Up
+          </Button>
+        </Group>
+      </Paper>
     </Box>
   );
 };
