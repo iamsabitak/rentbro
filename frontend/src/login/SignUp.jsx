@@ -26,27 +26,21 @@ import useValidation from "../utils/useValidation";
 const SignUp = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
     setErrorMessage("");
-
+  
     const { firstName, lastName, email, password, confirmPassword } = data;
-
+  
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
       const response = await fetch("http://localhost:5000/signup", {
         method: "POST",
@@ -54,21 +48,30 @@ const SignUp = ({ setIsAuthenticated }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          first_Name: firstName,
-          last_Name: lastName,
+          firstName,
+          lastName,
           email,
           password,
         }),
       });
-
+  
       const resData = await response.json();
-
+  
       if (response.ok) {
         setIsAuthenticated(true);
         alert("Signup successful!");
         navigate("/signin");
       } else {
-        setErrorMessage(resData.message || "Signup failed. Please try again.");
+        if (resData.message === "Email already exists") {
+          setErrorMessage(
+            "This email is already registered. Try logging in instead."
+          );
+          // Don't navigate to sign-in page, just show the error.
+        } else {
+          setErrorMessage(
+            resData.message || "Signup failed. Please try again."
+          );
+        }
       }
     } catch (error) {
       setErrorMessage("An unexpected error occurred. Please try again later.");
@@ -76,7 +79,7 @@ const SignUp = ({ setIsAuthenticated }) => {
       setLoading(false);
     }
   };
-
+  
   const schema = useValidation();
 
   const {
@@ -150,10 +153,12 @@ const SignUp = ({ setIsAuthenticated }) => {
               label="Password"
               placeholder="Your password"
               required
+              // onPaste={(e) => e.preventDefault()}
               {...register("password")}
               error={errors.password?.message}
             />
             <PasswordInput
+              // onPaste={(e) => e.preventDefault()}
               label="Confirm Password"
               placeholder="Re-enter password"
               required
