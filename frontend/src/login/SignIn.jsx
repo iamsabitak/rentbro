@@ -52,15 +52,16 @@ const SignIn = ({ setIsAuthenticated }) => {
       });
 
       const data = await response.json();
-      console.log("data", data);
 
       if (response.ok) {
         const userData = {
-          name: `${data?.first_Name || "No"} ${data?.last_Name || "Name"}`,
-          avatar: data?.avatar || "",
+          firstName: data?.user?.firstName || "No",
+          lastName: data?.user?.lastName || "Name",
+          avatar: data?.user?.avatar || "",
         };
 
         localStorage.setItem("user", JSON.stringify(userData));
+
         setIsAuthenticated(true);
         navigate("/");
       } else {

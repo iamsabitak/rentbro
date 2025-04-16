@@ -107,7 +107,7 @@ const Navigation = ({ setIsAuthenticated }) => {
               radius="xl"
             />
             <Text ml={8} mr={30}>
-              {user?.name || "Guest"}
+              {user?.firstName} {user?.lastName}
             </Text>
             <Button
               onClick={handleSignOut}
