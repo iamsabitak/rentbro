@@ -1,74 +1,25 @@
 import { Box, Button, Flex, Card, Image, Text, Badge } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Facilitites = () => {
   const [showAll, setShowAll] = useState(false);
+  const [roomData, setRoomData] = useState([]);
 
-  const roomData = [
-    {
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-      title: "Cozy Studio Apartment",
-      description:
-        "Perfect for students. Includes Wi-Fi, water, and electricity.",
-      price: "Rs. 15,000/month",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-      title: "Cozy Studio Apartment",
-      description:
-        "Perfect for students. Includes Wi-Fi, water, and electricity.",
-      price: "Rs. 15,000/month",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-      title: "Cozy Studio Apartment",
-      description:
-        "Perfect for students. Includes Wi-Fi, water, and electricity.",
-      price: "Rs. 15,000/month",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-      title: "Cozy Studio Apartment",
-      description:
-        "Perfect for students. Includes Wi-Fi, water, and electricity.",
-      price: "Rs. 15,000/month",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-      title: "Cozy Studio Apartment",
-      description:
-        "Perfect for students. Includes Wi-Fi, water, and electricity.",
-      price: "Rs. 15,000/month",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1572881940103-8eeb7f5e4a78",
-      title: "Spacious 2BHK Flat",
-      description: "Ideal for families with ample parking and security.",
-      price: "Rs. 30,000/month",
-      link: "https://example.com/2bhk-flat",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
-      title: "Single Room for Rent",
-      description: "Affordable and comfortable room for working professionals.",
-      price: "Rs. 10,000/month",
-      link: "https://example.com/single-room",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1588222790975-c4f700f8e536",
-      title: "Luxury 3BHK Penthouse",
-      description: "Fully furnished with a beautiful view of the city skyline.",
-      price: "Rs. 50,000/month",
-      link: "https://example.com/luxury-penthouse",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1531781466357-5a47efb73ff2",
-      title: "Budget Studio Room",
-      description: "A compact and affordable studio room with basic amenities.",
-      price: "Rs. 8,000/month",
-      link: "https://example.com/budget-studio",
-    },
-  ];
+  useEffect(() => {
+    fetch("http://localhost:5000/rooms")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setRoomData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <Box m={"2.9rem 2rem 0rem 5rem"}>
