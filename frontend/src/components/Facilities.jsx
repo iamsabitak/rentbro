@@ -1,7 +1,9 @@
 import { Box, Button, Flex, Card, Image, Text, Badge } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Facilitites = () => {
+  const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
   const [roomData, setRoomData] = useState([]);
 
@@ -78,7 +80,13 @@ const Facilitites = () => {
               {room.price}
             </Badge>
 
-            <Button variant="filled" color="#008080" radius="md" mt="md">
+            <Button
+              variant="filled"
+              color="#008080"
+              radius="md"
+              mt="md"
+              onClick={() => navigate(`/rooms/${room.id}`)}
+            >
               View Detail
             </Button>
           </Card>
