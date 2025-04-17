@@ -1,12 +1,24 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Box, Text, Image, Badge, Loader, Center, Button } from "@mantine/core";
+import {
+  Box,
+  Text,
+  Image,
+  Badge,
+  Loader,
+  Center,
+  Button,
+  Modal,
+  Group,
+  Paper,
+} from "@mantine/core";
 import axios from "axios";
 
 const RoomDetail = () => {
   const { id } = useParams();
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [bookingModal, setBookingModal] = useState(false); // Modal state for booking confirmation
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -22,6 +34,12 @@ const RoomDetail = () => {
 
     fetchRoom();
   }, [id]);
+
+  const handleBooking = () => {
+    // Trigger room booking logic (API call or show booking details)
+    console.log(`Booking room with ID: ${id}`);
+    setBookingModal(true); // Open booking confirmation modal
+  };
 
   if (loading) {
     return (
@@ -40,22 +58,80 @@ const RoomDetail = () => {
   }
 
   return (
-    <Box p="2rem">
-      <Image src={room.image} height={300} alt={room.title} radius="md" mb="1.5rem" />
+    <Center>
+      <Box p="2rem" style={{ maxWidth: "800px", width: "100%" }}>
+        <Image
+          src={room.image}
+          height={500}
+          w={"100%"}
+          alt={room.title}
+          radius="md"
+          mb="1.5rem"
+          style={{ objectFit: "cover" }}
+        />
 
-      <Text size="2rem" fw={700} mb="0.5rem">{room.title}</Text>
-      <Text c="dimmed" mb="1rem">{room.description}</Text>
+        <Text size="2rem" fw={700} mb="0.5rem" c="dark" align="center">
+          {room.title}
+        </Text>
 
-      <Badge color="#008080" size="lg" mb="1rem">
-        Rs. {room.price}
-      </Badge>
+        <Text c="dimmed" mb="1rem" align="center">
+          {room.description}
+        </Text>
 
-      <Text fw={600}>More details coming soon...</Text>
+        <Badge color="#008080" size="lg" mb="1rem" align="center">
+          Rs. {room.price}
+        </Badge>
 
-      <Button mt="2rem" variant="outline" color="teal" onClick={() => window.history.back()}>
-        Go Back
-      </Button>
-    </Box>
+        <Group position="apart" mb="1.5rem" align="center">
+          <Text fw={600} c="gray">
+            More details coming soon...
+          </Text>
+          <Button
+            variant="gradient"
+            gradient={{ from: "teal", to: "#008080", deg: 60 }}
+            onClick={handleBooking}
+          >
+            Book Room
+          </Button>
+        </Group>
+
+        {/* Booking Confirmation Modal */}
+        <Modal
+          opened={bookingModal}
+          onClose={() => setBookingModal(false)}
+          title="Booking Confirmation"
+          centered
+        >
+          <Paper p="md" shadow="sm">
+            <Text size="lg">
+              You have successfully booked the room:{" "}
+              <strong>{room.title}</strong>
+            </Text>
+            <Text c="dimmed">
+              Your booking details will be sent to your email.
+            </Text>
+            <Group position="right" mt="md">
+              <Button
+                variant="outline"
+                color="#008080"
+                onClick={() => setBookingModal(false)}
+              >
+                Close
+              </Button>
+            </Group>
+          </Paper>
+        </Modal>
+
+        <Button
+          variant="outline"
+          mt="2rem"
+          color="#008080"
+          onClick={() => window.history.back()}
+        >
+          Go Back
+        </Button>
+      </Box>
+    </Center>
   );
 };
 
