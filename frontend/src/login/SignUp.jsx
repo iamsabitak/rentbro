@@ -31,16 +31,16 @@ const SignUp = ({ setIsAuthenticated }) => {
 
   const onSubmit = async (data) => {
     setErrorMessage("");
-  
+
     const { firstName, lastName, email, password, confirmPassword } = data;
-  
+
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
       return;
     }
-  
+
     setLoading(true);
-  
+
     try {
       const response = await fetch("http://localhost:5000/signup", {
         method: "POST",
@@ -48,15 +48,15 @@ const SignUp = ({ setIsAuthenticated }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          first_Name: firstName,
+          last_Name: lastName,
           email,
           password,
         }),
       });
-  
+
       const resData = await response.json();
-  
+
       if (response.ok) {
         setIsAuthenticated(true);
         alert("Signup successful!");
@@ -79,7 +79,7 @@ const SignUp = ({ setIsAuthenticated }) => {
       setLoading(false);
     }
   };
-  
+
   const schema = useValidation();
 
   const {
