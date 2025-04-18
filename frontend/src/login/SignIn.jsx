@@ -55,8 +55,8 @@ const SignIn = ({ setIsAuthenticated }) => {
 
       if (response.ok) {
         const userData = {
-          firstName: data?.user?.firstName || "No",
-          lastName: data?.user?.lastName || "Name",
+          firstName: data?.user?.first_name || "No",
+          lastName: data?.user?.last_name || "Name",
           avatar: data?.user?.avatar || "",
         };
 
