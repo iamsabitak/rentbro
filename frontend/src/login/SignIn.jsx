@@ -37,8 +37,6 @@ const SignIn = ({ setIsAuthenticated }) => {
       return;
     }
 
-    console.log("Sending", { email, password });
-
     setIsLoading(true);
     setError("");
 

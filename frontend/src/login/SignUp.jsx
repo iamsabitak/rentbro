@@ -59,7 +59,6 @@ const SignUp = ({ setIsAuthenticated }) => {
 
       if (response.ok) {
         setIsAuthenticated(true);
-        alert("Signup successful!");
         navigate("/signin");
       } else {
         if (resData.message === "Email already exists") {
