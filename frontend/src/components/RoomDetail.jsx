@@ -100,7 +100,7 @@ const RoomDetail = () => {
         radius="lg"
         shadow="md" // Slightly stronger shadow
         withBorder
-        sx={{
+        styles={{
           overflow: "hidden",
           borderColor: theme.colors.gray[2],
         }} // Use theme for border color
@@ -250,7 +250,7 @@ const RoomDetail = () => {
                 <Title order={4} mb="sm" c={theme.colors.blue[7]}>
                   Description
                 </Title>
-                <Text c="dimmed" sx={{ lineHeight: 1.6 }}>
+                <Text c="dimmed" styles={{ lineHeight: 1.6 }}>
                   {room.description ||
                     "This beautifully appointed room features contemporary decor with all the modern amenities you need for a comfortable stay. Enjoy premium bedding, a spacious work area, and stunning views."}
                 </Text>
@@ -308,7 +308,7 @@ const RoomDetail = () => {
                   radius="md"
                   color="#008080"
                   onClick={handleBooking}
-                  sx={{ fontWeight: 600 }}
+                  styles={{ fontWeight: 600 }}
                 >
                   Book Now
                 </Button>
@@ -319,7 +319,7 @@ const RoomDetail = () => {
                   color="#008080"
                   leftIcon={<IconCalendar size={18} />}
                   onClick={handleAdvanceBooking}
-                  sx={{ fontWeight: 600 }}
+                  styles={{ fontWeight: 600 }}
                 >
                   Book in Advance
                 </Button>
@@ -375,7 +375,7 @@ const RoomDetail = () => {
             onClick={() => setBookingModal(false)}
             radius="md"
             mt="md"
-            sx={{ fontWeight: 600 }}
+            styles={{ fontWeight: 600 }}
           >
             Close
           </Button>
@@ -416,7 +416,7 @@ const RoomDetail = () => {
             onClick={() => setAdvanceModal(false)}
             radius="md"
             mt="md"
-            sx={{ fontWeight: 600 }}
+            styles={{ fontWeight: 600 }}
           >
             Close
           </Button>
