@@ -101,7 +101,7 @@ const SignUp = ({ setIsAuthenticated }) => {
         alignItems: "center",
       }}
     >
-      <Paper shadow="md" radius="lg" p="xl" withBorder w={500}>
+      <Paper shadow="md" radius="lg" p="3rem" withBorder w={500}>
         <Title order={2} align="center" mb="sm" c="#008080">
           Create an Account
         </Title>

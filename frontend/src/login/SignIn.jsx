@@ -85,7 +85,7 @@ const SignIn = ({ setIsAuthenticated }) => {
         alignItems: "center",
       }}
     >
-      <Paper shadow="md" radius="lg" p="xl" withBorder w={500}>
+      <Paper shadow="md" radius="lg" p="3rem" withBorder w={500}>
         <Title align="center" order={2} mb="md" c="#008080">
           Welcome Back 👋
         </Title>

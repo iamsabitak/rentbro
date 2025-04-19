@@ -1,4 +1,13 @@
-import { Box, Button, Flex, Card, Image, Text, Badge } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Card,
+  Image,
+  Text,
+  Badge,
+  Center,
+} from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,12 +33,12 @@ const Facilitites = () => {
   }, []);
 
   return (
-    <Box m={"2.9rem 2rem 0rem 5rem"}>
+    <Center m={"0rem 5rem 6rem 9rem"} display={"block"}>
       <Box>
-        <Text size="2rem" mb={10} fw={700}>
+        <Text size="2.9rem" fw={700} mb={10} ml={"3.9rem"}>
           Our Most Popular Rooms
         </Text>
-        <Flex justify={"space-evenly"} align={"center"} gap={"22rem"}>
+        <Flex justify={"space-evenly"} align={"center"} gap={"30rem"}>
           <Text c="dimmed" mb={20} size="0.9rem">
             Discover the most sought-after rooms chosen by renters for their
             comfort, convenience, and value.
@@ -52,7 +61,7 @@ const Facilitites = () => {
         align={"center"}
         gap={"0.7rem"}
         wrap="wrap" // Allows wrapping of cards into multiple rows
-        pt={"2rem"}
+        pt={"4rem"}
         ml={"-3rem"}
       >
         {roomData.slice(0, showAll ? roomData.length : 3).map((room, index) => (
@@ -92,7 +101,7 @@ const Facilitites = () => {
           </Card>
         ))}
       </Flex>
-    </Box>
+    </Center>
   );
 };
 

@@ -43,8 +43,8 @@ const Navigation = ({ setIsAuthenticated }) => {
 
   return (
     <>
-      <Flex p={24} justify={"right"} gap={"18rem"}>
-        <Group gap={40}>
+      <Flex p="2rem 0rem 1rem 0rem" justify={"center"} gap={"33rem"}>
+        <Group>
           <Text
             size="lg"
             weight={700}
@@ -100,7 +100,7 @@ const Navigation = ({ setIsAuthenticated }) => {
 
         {/* Conditional rendering based on user authentication */}
         {user ? (
-          <Flex align="center">
+          <Flex align="center" gap={"1rem"}>
             <Avatar
               src={user?.avatar || "path_to_default_avatar"}
               alt={user?.name || "No Name"}
@@ -114,7 +114,6 @@ const Navigation = ({ setIsAuthenticated }) => {
               variant="filled"
               radius="xl"
               color="#008080"
-              mr={"4rem"}
             >
               Sign Out
             </Button>{" "}
@@ -125,8 +124,7 @@ const Navigation = ({ setIsAuthenticated }) => {
             variant="filled"
             radius="xl"
             color="#008080"
-            mr={"4rem"}
-            onClick={() => navigate("/signin")}
+            onClick={() => navigate("/authpage")}
           >
             Sign In
           </Button>

@@ -8,6 +8,7 @@ import {
   Image,
   Anchor,
   Divider,
+  Center,
 } from "@mantine/core";
 import {
   IconChevronLeft,
@@ -49,8 +50,8 @@ const Contact = () => {
     );
 
   return (
-    <Box>
-      <Flex align={"center"} pb={"2rem"}>
+    <Center display={"block"}>
+      <Flex align={"center"} pb={"4rem"} ml={"9rem"}>
         <Text
           bg={activeIndex === 0 ? "#e0e0e0" : "#f5f5f5"}
           ml={"6rem"}
@@ -320,7 +321,7 @@ const Contact = () => {
           &copy; 2024 All rights reserved.
         </Text>
       </Box>
-    </Box>
+    </Center>
   );
 };
 

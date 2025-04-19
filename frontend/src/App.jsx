@@ -6,6 +6,7 @@ import SignIn from "./login/SignIn";
 import Signup from "./login/SignUp";
 import { useState } from "react";
 import RoomDetail from "./components/RoomDetail";
+import AuthPage from "./login/AuthPage";
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
@@ -26,6 +27,10 @@ const App = () => {
           <Route
             path="/signup"
             element={<Signup setIsAuthenticated={setIsAuthenticated} />}
+          />
+          <Route
+            path="/authpage"
+            element={<AuthPage setIsAuthenticated={setIsAuthenticated} />}
           />
           <Route path="/rooms/:id" element={<RoomDetail />} />
         </Routes>

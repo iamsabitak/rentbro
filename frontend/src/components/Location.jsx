@@ -1,4 +1,13 @@
-import { Text, Box, Image, Flex, Button, Card, Badge } from "@mantine/core";
+import {
+  Text,
+  Box,
+  Image,
+  Flex,
+  Button,
+  Card,
+  Badge,
+  Center,
+} from "@mantine/core";
 import { IconCircleCheck, IconCircleX } from "@tabler/icons-react";
 
 const pricingData = [
@@ -61,14 +70,11 @@ const Location = () => {
   ];
 
   return (
-    <Box pb={"2rem"}>
+    <Center m={"6rem 14rem 3rem 14rem"} display={"block"}>
       <Flex
-        m={"5rem 2rem 0rem 5rem"}
         bg={" #ebfcfc"}
-        // bg={"#f5f5f5"}
         border={"1px solid #dedede"}
         align={"center"}
-        w={"70rem"}
         style={{
           boxShadow: "5px 5px 5px 4px #f5f5f5",
           borderStartStartRadius: "1rem",
@@ -114,20 +120,13 @@ const Location = () => {
         <Text size="2.5rem" weight={900} fw={700}>
           Affordable Plans for Every Budget
         </Text>
-        <Flex justify="center" gap="2rem" wrap="wrap" mt={"4rem"}>
+        <Flex justify="center" gap="1.9rem" wrap="wrap" mt={"4rem"}>
           {pricingData.map(
             ({ plan, price, features, missingFeatures, popular }) => (
               <Card key={plan} withBorder shadow="sm" p="2rem" w={349}>
                 <Flex justify="space-between" align={"center"} mb={"0.3rem"}>
                   <Text fw={600}>{plan}</Text>
-                  {popular && (
-                    <Badge
-                      color="yellow"
-                      // styles={{ label: { color: "black" } }}
-                    >
-                      Most Popular
-                    </Badge>
-                  )}
+                  {popular && <Badge color="yellow">Most Popular</Badge>}
                 </Flex>
                 <Text fw={700} size="2rem" mt={10} align="left">
                   ₹{price}
@@ -158,7 +157,7 @@ const Location = () => {
           )}
         </Flex>
       </Box>
-    </Box>
+    </Center>
   );
 };
 

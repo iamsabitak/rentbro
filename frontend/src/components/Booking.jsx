@@ -53,130 +53,131 @@ const Bookings = () => {
   };
 
   return (
-    <Box pb={"2rem"}>
-      <Flex
-        m={"0.5rem 2rem 0rem 5rem"}
-        bg={"#ebfcfc"}
-        border={"1px solid #dedede"}
-        align={"center"}
-        w={"70rem"}
-        style={{
-          boxShadow: "5px 5px 5px 4px #f5f5f5",
-          borderStartStartRadius: "1rem",
-          borderStartEndRadius: "1rem",
-        }}
-        gap={"16rem"}
-      >
-        <Box pl={`3rem`}>
-          <Text size="2.9rem" fw={700} mb={10}>
-            Find Your Perfect Room, Anytime, Anywhere
-          </Text>
-          <Text c="dimmed" mb={20} size="0.9rem" mt={16}>
-            Discover verified listings, flexible leases, and secure payments.
-            Renting made easy for everyone!
-          </Text>
-          <Group style={{ cursor: "pointer" }}>
-            <Box
-              p={`0.6rem 0.7rem 0.4rem`}
-              bg={"#ffffff"}
-              style={{
-                borderRadius: "15rem",
-                border: "1px solid #dedede",
-                boxShadow: "0px 0px 3px #aaaaaa",
-              }}
-            >
-              <IconPlayerPlay size={20} color="#008080" fill="#008080" />
-            </Box>
-            <Text weight={600}>Watch video</Text>
-          </Group>
-        </Box>
-        <Image
-          src="https://img.staticmb.com/mbcontent/images/crop/uploads/2024/6/Cyan-Colour-in-Bedroom_0_1200.jpg"
-          h={450}
-          alt="House"
-          style={{ borderStartEndRadius: "1rem" }}
-        />
-      </Flex>
-
-      {/* Search Input */}
-      <Center mt={-35}>
-        <Input
-          placeholder="Search rooms by location, budget, amenities, and more..."
-          value={searchQuery}
-          onChange={handleSearch}
-          radius="10rem"
-          size="md"
-          w={"54rem"}
-        />
-      </Center>
-
-      {/* Room Cards */}
-      {loading ? (
-        <Center mt={40}>
-          <Loader color="teal" />
-        </Center>
-      ) : (
+    <Center>
+      {" "}
+      <Box m={"2rem 14rem 2rem 14rem"}>
         <Flex
-          justify="space-evenly"
-          align="center"
-          gap="1.5rem"
-          wrap="wrap"
-          pt="2rem"
-          mt="2rem"
-          px="3rem"
+          bg={"#ebfcfc"}
+          border={"1px solid #dedede"}
+          align={"center"}
+          style={{
+            boxShadow: "5px 5px 5px 4px #f5f5f5",
+            borderStartStartRadius: "1rem",
+            borderStartEndRadius: "1rem",
+          }}
+          gap={"16rem"}
         >
-          {searchQuery.trim() !== "" ? (
-            filteredRooms.length > 0 ? (
-              filteredRooms.map((room, index) => (
-                <Card
-                  key={index}
-                  shadow="sm"
-                  padding="lg"
-                  component="a"
-                  target="_blank"
-                  style={{
-                    width: "20rem",
-                    margin: "10px",
-                  }}
-                >
-                  <Card.Section>
-                    <Image src={room.image} h={160} alt={room.title} />
-                  </Card.Section>
-
-                  <Text fw={500} size="lg" mt="md">
-                    {room.title}
-                  </Text>
-
-                  <Text mt="xs" c="dimmed" size="sm">
-                    {room.description}
-                  </Text>
-
-                  <Badge color="#008080" mt="md">
-                    Rs. {room.price}
-                  </Badge>
-
-                  <Button
-                    variant="filled"
-                    color="#008080"
-                    radius="md"
-                    mt="md"
-                    onClick={() => navigate(`/rooms/${room.id}`)}
-                  >
-                    View Detail
-                  </Button>
-                </Card>
-              ))
-            ) : (
-              <Center>
-                <Text c="dimmed" mt={30}>
-                  No rooms found matching your search
-                </Text>
-              </Center>
-            )
-          ) : null}
+          <Box pl={`3rem`}>
+            <Text size="2.9rem" fw={700} mb={10}>
+              Find Your Perfect Room, Anytime, Anywhere
+            </Text>
+            <Text c="dimmed" mb={20} size="0.9rem" mt={16}>
+              Discover verified listings, flexible leases, and secure payments.
+              Renting made easy for everyone!
+            </Text>
+            <Group style={{ cursor: "pointer" }}>
+              <Box
+                p={`0.6rem 0.7rem 0.4rem`}
+                bg={"#ffffff"}
+                style={{
+                  borderRadius: "15rem",
+                  border: "1px solid #dedede",
+                  boxShadow: "0px 0px 3px #aaaaaa",
+                }}
+              >
+                <IconPlayerPlay size={20} color="#008080" fill="#008080" />
+              </Box>
+              <Text weight={600}>Watch video</Text>
+            </Group>
+          </Box>
+          <Image
+            src="https://img.staticmb.com/mbcontent/images/crop/uploads/2024/6/Cyan-Colour-in-Bedroom_0_1200.jpg"
+            h={450}
+            alt="House"
+            style={{ borderStartEndRadius: "1rem" }}
+          />
         </Flex>
-      )}
-    </Box>
+
+        {/* Search Input */}
+        <Center mt={-35}>
+          <Input
+            placeholder="Search rooms by location, budget, amenities, and more..."
+            value={searchQuery}
+            onChange={handleSearch}
+            radius="10rem"
+            size="md"
+            w={"54rem"}
+          />
+        </Center>
+
+        {/* Room Cards */}
+        {loading ? (
+          <Center mt={40}>
+            <Loader color="teal" />
+          </Center>
+        ) : (
+          <Flex
+            justify="space-evenly"
+            align="center"
+            gap="1.5rem"
+            wrap="wrap"
+            pt="2rem"
+            mt="2rem"
+            px="3rem"
+          >
+            {searchQuery.trim() !== "" ? (
+              filteredRooms.length > 0 ? (
+                filteredRooms.map((room, index) => (
+                  <Card
+                    key={index}
+                    shadow="sm"
+                    padding="lg"
+                    component="a"
+                    target="_blank"
+                    style={{
+                      width: "20rem",
+                      margin: "10px",
+                    }}
+                  >
+                    <Card.Section>
+                      <Image src={room.image} h={160} alt={room.title} />
+                    </Card.Section>
+
+                    <Text fw={500} size="lg" mt="md">
+                      {room.title}
+                    </Text>
+
+                    <Text mt="xs" c="dimmed" size="sm">
+                      {room.description}
+                    </Text>
+
+                    <Badge color="#008080" mt="md">
+                      Rs. {room.price}
+                    </Badge>
+
+                    <Button
+                      variant="filled"
+                      color="#008080"
+                      radius="md"
+                      mt="md"
+                      onClick={() => navigate(`/rooms/${room.id}`)}
+                    >
+                      View Detail
+                    </Button>
+                  </Card>
+                ))
+              ) : (
+                <Center>
+                  <Text c="dimmed" mt={30}>
+                    No rooms found matching your search
+                  </Text>
+                </Center>
+              )
+            ) : null}
+          </Flex>
+        )}
+      </Box>
+    </Center>
   );
 };
 
